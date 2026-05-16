@@ -23,7 +23,24 @@ const commands = [
 
   new SlashCommandBuilder()
     .setName("기록")
-    .setDescription("최근 7일간의 출퇴근 기록을 보여줍니다")
+    .setDescription("근태 기록을 조회합니다(본인만 보임)")
+    .addIntegerOption((option) =>
+      option
+        .setName("기간")
+        .setDescription("조회할 일수 (기본값: 7)")
+        .setRequired(false),
+    )
+    .addUserOption((option) =>
+      option
+        .setName("유저")
+        .setDescription("조회할 유저 (기본값: 본인)")
+        .setRequired(false),
+    )
+    .toJSON(),
+
+  new SlashCommandBuilder()
+    .setName("현황")
+    .setDescription("오늘 출근한 사람들의 현황을 보여줍니다(본인만 보임)")
     .toJSON(),
 ];
 
