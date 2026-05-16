@@ -7,11 +7,6 @@ const { REST, Routes, SlashCommandBuilder } = require("discord.js");
 // setName: 명령어 이름, setDescription: Discord UI에 표시될 설명
 const commands = [
   new SlashCommandBuilder()
-    .setName("ping")
-    .setDescription("Pong으로 응답합니다")
-    .toJSON(), // Discord API가 요구하는 JSON 형태로 변환
-
-  new SlashCommandBuilder()
     .setName("출근")
     .setDescription("출근 시간을 기록합니다")
     .toJSON(),
