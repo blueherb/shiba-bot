@@ -2,7 +2,6 @@
   // Discord.js 라이브러리에서 REST, Routes, SlashCommandBuilder 클래스 가져오기
   require('dotenv').config();
   const { REST, Routes, SlashCommandBuilder } = require('discord.js');
-  console.log('토큰 길이:', process.env.DISCORD_TOKEN?.length); 
 
   // 등록할 슬래시 명령어 목록
   // setName: 명령어 이름, setDescription: Discord UI에 표시될 설명
