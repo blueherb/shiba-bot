@@ -20,6 +20,11 @@ const commands = [
     .setName("퇴근")
     .setDescription("퇴근 시간을 기록합니다")
     .toJSON(),
+
+  new SlashCommandBuilder()
+    .setName("기록")
+    .setDescription("최근 7일간의 출퇴근 기록을 보여줍니다")
+    .toJSON(),
 ];
 
 // .env의 DISCORD_TOKEN으로 Discord REST API 클라이언트 생성
