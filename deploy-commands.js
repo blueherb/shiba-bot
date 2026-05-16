@@ -7,9 +7,36 @@ const { REST, Routes, SlashCommandBuilder } = require("discord.js");
 // setName: 명령어 이름, setDescription: Discord UI에 표시될 설명
 const commands = [
   new SlashCommandBuilder()
-    .setName("ping")
-    .setDescription("Pong으로 응답합니다")
-    .toJSON(), // Discord API가 요구하는 JSON 형태로 변환
+    .setName("출근")
+    .setDescription("출근 시간을 기록합니다")
+    .toJSON(),
+
+  new SlashCommandBuilder()
+    .setName("퇴근")
+    .setDescription("퇴근 시간을 기록합니다")
+    .toJSON(),
+
+  new SlashCommandBuilder()
+    .setName("기록")
+    .setDescription("근태 기록을 조회합니다(본인만 보임)")
+    .addIntegerOption((option) =>
+      option
+        .setName("기간")
+        .setDescription("조회할 일수 (기본값: 7)")
+        .setRequired(false),
+    )
+    .addUserOption((option) =>
+      option
+        .setName("유저")
+        .setDescription("조회할 유저 (기본값: 본인)")
+        .setRequired(false),
+    )
+    .toJSON(),
+
+  new SlashCommandBuilder()
+    .setName("현황")
+    .setDescription("오늘 출근한 사람들의 현황을 보여줍니다(본인만 보임)")
+    .toJSON(),
 ];
 
 // .env의 DISCORD_TOKEN으로 Discord REST API 클라이언트 생성
