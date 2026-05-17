@@ -6,4 +6,3 @@
         - .env
       volumes:
         - ./data:/app/data
-        - /etc/localtime:/etc/localtime:ro
