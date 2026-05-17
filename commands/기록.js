@@ -24,8 +24,22 @@ module.exports = {
       .sort((a, b) => b[0].localeCompare(a[0]))
       .slice(0, days)
       .map(([date, record]) => {
-        const clockOut = record.clockOut ?? "미등록";
-        return `**${date}**\n출근 ${record.clockIn}, 퇴근 ${clockOut}`;
+        let line = `📅 **${date}**\n🟢 \`${record.clockIn}\` 출근　🔴 \`${record.clockOut ?? "미등록"}\` 퇴근`;
+
+        if (record.breaks?.length > 0) {
+          const breakList = record.breaks
+            .map((b) => `\`${b.start}~${b.end ?? "진행 중"}\``)
+            .join(", ");
+          const totalMins = record.breaks.reduce((sum, b) => {
+            if (!b.end) return sum;
+            const [sh, sm] = b.start.split(":").map(Number);
+            const [eh, em] = b.end.split(":").map(Number);
+            return sum + (eh * 60 + em) - (sh * 60 + sm);
+          }, 0);
+          line += `\n☕ ${breakList}${totalMins > 0 ? ` (총 ${totalMins}분)` : ""}`;
+        }
+
+        return line;
       });
 
     const embed = new EmbedBuilder()
