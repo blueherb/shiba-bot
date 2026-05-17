@@ -1,10 +1,14 @@
-  FROM node:20-alpine
+FROM node:20-alpine
 
-  WORKDIR /app
+RUN apk add --no-cache tzdata && \
+    ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime && \
+    echo "Asia/Seoul" > /etc/timezone
 
-  COPY package*.json ./
-  RUN npm ci --omit=dev
+WORKDIR /app
 
-  COPY . .
+COPY package*.json ./
+RUN npm ci --omit=dev
 
-  CMD ["node", "index.js"]
+COPY . .
+
+CMD ["node", "index.js"]

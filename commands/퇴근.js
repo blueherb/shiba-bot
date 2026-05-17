@@ -6,7 +6,7 @@ module.exports = {
   // interaction : 명령어 입력 정보 (누가, 어느 서버에서)
   async execute(interaction) {
     const userID = interaction.user.id; // 명령어 입력한 사용자의 ID
-    const today = new Date().toISOString().slice(0, 10); // 오늘 날짜 (YYYY-MM-DD)
+    const today = new Date().toLocaleDateString("sv"); // 오늘 날짜 (YYYY-MM-DD)
     const now = new Date().toTimeString().slice(0, 5); // 현재 시간 (HH:MM)
 
     // 출근 기록이 없는 경우 퇴근 처리 불가
