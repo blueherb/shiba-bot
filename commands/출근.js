@@ -1,3 +1,4 @@
+const { EmbedBuilder } = require("discord.js");
 const { readData, writeData } = require("../utils/attendance");
 
 module.exports = {
@@ -12,14 +13,17 @@ module.exports = {
     // 이미 출근한 상태인 경우 중복 방지
     const data = readData(); // attendance.json에서 데이터 읽기
     if (data[userID]?.[today]?.clockIn) {
-      await interaction.reply("이미 출근처리 되었습니다.");
+      await interaction.reply({ content: "이미 출근처리 되었습니다.", ephemeral: true });
       return;
     }
 
     // 유저 데이터가 없다면 초기화
     if (!data[userID]) data[userID] = {};
     data[userID][today] = { clockIn: now, clockOut: null }; // 출근 시간 기록
-    writeData(data); // attendance.json에 데이터 저장
-    await interaction.reply(`출근 완료: ${now}`);
+    writeData(data);
+    const embed = new EmbedBuilder()
+      .setColor(0x57f287)
+      .setDescription(`🟢 **출근 완료!**\n🕐 \`${now}\` — 오늘도 화이팅입니다!`);
+    await interaction.reply({ embeds: [embed] });
   },
 };

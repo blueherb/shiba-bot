@@ -1,3 +1,4 @@
+const { EmbedBuilder } = require("discord.js");
 const { readData, writeData } = require("../utils/attendance");
 
 module.exports = {
@@ -26,7 +27,10 @@ module.exports = {
       }
       record.breaks.push({ start: now });
       writeData(data);
-      await interaction.reply({ content: `휴식 시작: ${now}`, ephemeral: true });
+      const startEmbed = new EmbedBuilder()
+        .setColor(0xfee75c)
+        .setDescription(`🟡 **휴식 시작!**\n🕐 \`${now}\` — 잠시 쉬어가세요~`);
+      await interaction.reply({ embeds: [startEmbed] });
 
     } else if (sub === "종료") {
       const current = record.breaks.findLast((b) => !b.end);
@@ -36,7 +40,10 @@ module.exports = {
       }
       current.end = now;
       writeData(data);
-      await interaction.reply({ content: `휴식 종료: ${now}`, ephemeral: true });
+      const endEmbed = new EmbedBuilder()
+        .setColor(0x57f287)
+        .setDescription(`🟢 **휴식 종료!**\n🕐 \`${now}\` — 다시 달려봐요!`);
+      await interaction.reply({ embeds: [endEmbed] });
     }
   },
 };

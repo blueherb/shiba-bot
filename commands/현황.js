@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 const { readData } = require("../utils/attendance");
+const { workSummaryLine } = require("../utils/worktime");
 
 module.exports = {
   name: "현황",
@@ -14,14 +15,18 @@ module.exports = {
     );
 
     if (todayEntries.length === 0) {
-      await interaction.reply("오늘 출근한 사람이 없습니다.");
+      await interaction.reply({ content: "오늘 출근한 사람이 없습니다.", ephemeral: true });
       return;
     }
 
     const lines = todayEntries.map(([userID, records]) => {
       const record = records[today];
-      const clockOut = record.clockOut ?? "근무 중";
-      return `<@${userID}>: 출근 ${record.clockIn} / 퇴근 ${clockOut}`;
+      const onBreak = record.breaks?.some((b) => !b.end);
+      const statusEmoji = record.clockOut ? "⬜" : (onBreak ? "🟡" : "🟢");
+      const statusText = record.clockOut
+        ? `\`${record.clockOut}\` 퇴근`
+        : (onBreak ? "휴식 중" : "근무 중");
+      return `${statusEmoji} <@${userID}>\n　🕐 \`${record.clockIn}\` 출근 → ${statusText}\n　${workSummaryLine(record)}`;
     });
 
     const embed = new EmbedBuilder()
