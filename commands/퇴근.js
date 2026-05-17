@@ -1,3 +1,4 @@
+const { EmbedBuilder } = require("discord.js");
 const { readData, writeData } = require("../utils/attendance");
 const { calcRealWork } = require("../utils/worktime");
 const { readConfig } = require("../utils/config");
@@ -35,7 +36,10 @@ module.exports = {
 
     record.clockOut = now;
     writeData(data);
-    await interaction.reply(`퇴근 완료: ${now}`);
+    const embed = new EmbedBuilder()
+      .setColor(0x5865f2)
+      .setDescription(`⬜ **퇴근 완료!**\n🕐 \`${now}\` — 오늘 하루도 수고하셨습니다!`);
+    await interaction.reply({ embeds: [embed] });
 
     const { dailyQuotaHours } = readConfig();
     if (calcRealWork(record) >= dailyQuotaHours * 60) {
