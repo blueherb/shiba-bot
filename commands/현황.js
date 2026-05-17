@@ -5,7 +5,7 @@ module.exports = {
   name: "현황",
 
   async execute(interaction) {
-    const today = new Date().toISOString().slice(0, 10); // 오늘 날짜 (YYYY-MM-DD)
+    const today = new Date().toLocaleDateString("sv"); // 오늘 날짜 (YYYY-MM-DD)
     const data = readData(); // attendance.json에서 데이터 읽기
 
     //  오늘 날짜 기록이 있는 유저들만 필터링

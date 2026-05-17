@@ -37,6 +37,17 @@ const commands = [
     .setName("현황")
     .setDescription("오늘 출근한 사람들의 현황을 보여줍니다(본인만 보임)")
     .toJSON(),
+
+  new SlashCommandBuilder()
+    .setName("휴식")
+    .setDescription("휴식 시간을 기록합니다")
+    .addSubcommand((sub) =>
+      sub.setName("시작").setDescription("휴식을 시작합니다"),
+    )
+    .addSubcommand((sub) =>
+      sub.setName("종료").setDescription("휴식을 종료합니다"),
+    )
+    .toJSON(),
 ];
 
 // .env의 DISCORD_TOKEN으로 Discord REST API 클라이언트 생성
