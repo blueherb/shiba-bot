@@ -26,7 +26,7 @@ module.exports = {
       }
       record.breaks.push({ start: now });
       writeData(data);
-      await interaction.reply({ content: `휴식 시작: ${now}`, ephemeral: true });
+      await interaction.reply(`휴식 시작: ${now}`);
 
     } else if (sub === "종료") {
       const current = record.breaks.findLast((b) => !b.end);
@@ -36,7 +36,7 @@ module.exports = {
       }
       current.end = now;
       writeData(data);
-      await interaction.reply({ content: `휴식 종료: ${now}`, ephemeral: true });
+      await interaction.reply(`휴식 종료: ${now}`);
     }
   },
 };

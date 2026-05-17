@@ -12,7 +12,7 @@ module.exports = {
     // 이미 출근한 상태인 경우 중복 방지
     const data = readData(); // attendance.json에서 데이터 읽기
     if (data[userID]?.[today]?.clockIn) {
-      await interaction.reply("이미 출근처리 되었습니다.");
+      await interaction.reply({ content: "이미 출근처리 되었습니다.", ephemeral: true });
       return;
     }
 

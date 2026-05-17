@@ -14,7 +14,7 @@ module.exports = {
     );
 
     if (todayEntries.length === 0) {
-      await interaction.reply("오늘 출근한 사람이 없습니다.");
+      await interaction.reply({ content: "오늘 출근한 사람이 없습니다.", ephemeral: true });
       return;
     }
 

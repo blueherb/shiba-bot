@@ -12,13 +12,13 @@ module.exports = {
     // 출근 기록이 없는 경우 퇴근 처리 불가
     const data = readData(); // attendance.json에서 데이터 읽기
     if (!data[userID]?.[today]?.clockIn) {
-      await interaction.reply("출근 기록이 없습니다.");
+      await interaction.reply({ content: "출근 기록이 없습니다.", ephemeral: true });
       return;
     }
 
     // 이미 퇴근한 상태인 경우 중복 방지
     if (data[userID][today].clockOut) {
-      await interaction.reply("이미 퇴근처리 되었습니다.");
+      await interaction.reply({ content: "이미 퇴근처리 되었습니다.", ephemeral: true });
       return;
     }
 

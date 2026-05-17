@@ -13,7 +13,7 @@ module.exports = {
 
     // 해당 유저의 기록이 아예 없는 경우
     if (!data[userID]) {
-      await interaction.reply("유저의 기록이 없습니다.");
+      await interaction.reply({ content: "유저의 기록이 없습니다.", ephemeral: true });
       return;
     }
 
