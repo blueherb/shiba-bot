@@ -3,8 +3,8 @@ require("dotenv").config();
 
 const fs = require("fs");
 const path = require("path");
-// Discord.js 라이브러리에서 현재 코드에서 필요한 Client 클래스와 GatewayIntentBits 객체를 가져옴
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
+const { startScheduler } = require("./utils/scheduler");
 // Client 객체를 생성, 봇이 서버에서 어떤 이벤트를 수신할지 설정 (여기서는 서버 관련 이벤트만 수신)
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -34,6 +34,7 @@ for (const file of eventFiles) {
 
 client.once("ready", () => {
   console.log(`로그인 완료: ${client.user.tag}`);
+  startScheduler(client);
 });
 
 // process.env.DISCORD_TOKEN을 읽어 Discord에 로그인, 이후 이벤트 수신 시작

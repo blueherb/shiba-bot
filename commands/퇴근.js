@@ -22,9 +22,17 @@ module.exports = {
       return;
     }
 
-    // 퇴근 시간 기록
-    data[userID][today].clockOut = now;
-    writeData(data); // attendance.json에 데이터 저장
+    const record = data[userID][today];
+
+    // 휴식 중인 경우 퇴근 시각으로 자동 종료
+    if (record.breaks) {
+      for (const b of record.breaks) {
+        if (!b.end) b.end = now;
+      }
+    }
+
+    record.clockOut = now;
+    writeData(data);
     await interaction.reply(`퇴근 완료: ${now}`);
   },
 };
