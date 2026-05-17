@@ -19,7 +19,6 @@ function readData() {
 // 근태 기록 객체를 JSON 문자열로 변환하여 파일에 저장한다.
 function writeData(data) {
   fs.writeFileSync(FILE_PATH, JSON.stringify(data, null, 2), "utf-8");
-  
 }
 // readData와 writeData 함수를 외부에서 사용할 수 있도록 모듈로 내보냄
 module.exports = { readData, writeData };

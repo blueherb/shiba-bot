@@ -32,10 +32,6 @@ for (const file of eventFiles) {
   client.on(event.name, (...args) => event.execute(client, ...args));
 }
 
-/**
- * Discord 연결 완료 시 1회 실행되는 핸들러.
- * 참조: client.user (로그인된 봇 객체)
- */
 client.once("ready", () => {
   console.log(`로그인 완료: ${client.user.tag}`);
 });
