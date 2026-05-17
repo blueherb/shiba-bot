@@ -1,4 +1,6 @@
 const { readData, writeData } = require("../utils/attendance");
+const { calcRealWork } = require("../utils/worktime");
+const { readConfig } = require("../utils/config");
 
 module.exports = {
   name: "퇴근",
@@ -34,5 +36,14 @@ module.exports = {
     record.clockOut = now;
     writeData(data);
     await interaction.reply(`퇴근 완료: ${now}`);
+
+    const { dailyQuotaHours } = readConfig();
+    if (calcRealWork(record) >= dailyQuotaHours * 60) {
+      try {
+        await interaction.user.send(`오늘 할당량 ${dailyQuotaHours}시간을 달성했습니다! 수고하셨습니다 🎉`);
+      } catch {
+        // DM 차단 시 무시
+      }
+    }
   },
 };

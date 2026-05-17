@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 const { readData } = require("../utils/attendance");
+const { workSummaryLine } = require("../utils/worktime");
 
 module.exports = {
   name: "기록",
@@ -37,6 +38,10 @@ module.exports = {
             return sum + (eh * 60 + em) - (sh * 60 + sm);
           }, 0);
           line += `\n☕ ${breakList}${totalMins > 0 ? ` (총 ${totalMins}분)` : ""}`;
+        }
+
+        if (record.clockOut) {
+          line += `\n　${workSummaryLine(record)}`;
         }
 
         return line;

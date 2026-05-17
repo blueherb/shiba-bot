@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 const { readData } = require("../utils/attendance");
+const { workSummaryLine } = require("../utils/worktime");
 
 module.exports = {
   name: "현황",
@@ -25,7 +26,7 @@ module.exports = {
       const statusText = record.clockOut
         ? `\`${record.clockOut}\` 퇴근`
         : (onBreak ? "휴식 중" : "근무 중");
-      return `${statusEmoji} <@${userID}>\n　🕐 \`${record.clockIn}\` 출근 → ${statusText}`;
+      return `${statusEmoji} <@${userID}>\n　🕐 \`${record.clockIn}\` 출근 → ${statusText}\n　${workSummaryLine(record)}`;
     });
 
     const embed = new EmbedBuilder()
