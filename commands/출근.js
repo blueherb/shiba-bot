@@ -13,7 +13,7 @@ module.exports = {
     // 이미 출근한 상태인 경우 중복 방지
     const data = readData(); // attendance.json에서 데이터 읽기
     if (data[userID]?.[today]?.clockIn) {
-      await interaction.reply({ content: "이미 출근처리 되었습니다.", ephemeral: true });
+      await interaction.reply({ content: "벌써 출근하셨잖아요. 시바는 기억하고 있어요.", ephemeral: true });
       return;
     }
 
@@ -23,7 +23,7 @@ module.exports = {
     writeData(data);
     const embed = new EmbedBuilder()
       .setColor(0x57f287)
-      .setDescription(`🟢 **출근 완료!**\n🕐 \`${now}\` — 오늘도 화이팅입니다!`);
+      .setDescription(`🟢 **출근 완료!**\n🕐 \`${now}\` — 오늘도 응원할게요 시바 🐾`);
     await interaction.reply({ embeds: [embed] });
   },
 };

@@ -1,3 +1,4 @@
+// worktime.js — 실근무 시간 계산 및 요약
 const { readConfig } = require("./config");
 
 // "HH:MM" → 분

@@ -30,7 +30,7 @@ function startScheduler(client) {
 
       try {
         const user = await client.users.fetch(userID);
-        await user.send(`오늘(${today}) 퇴근 처리가 되지 않아 ${clockOutTime}로 자동 퇴근 처리되었습니다.`);
+        await user.send(`퇴근을 잊으신 것 같아서 ${clockOutTime}에 처리해뒀어요 시바 🐾`);
       } catch {
         console.log(`[스케줄러] ${userID} DM 전송 실패`);
       }

@@ -1,3 +1,4 @@
+// config.js — 설정 파일 읽기 및 기본값 제공
 const fs = require("fs");
 const path = require("path");
 

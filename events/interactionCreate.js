@@ -1,3 +1,4 @@
+// interactionCreate.js — 슬래시 명령어 처리
 module.exports = {
   name: "interactionCreate",
 
