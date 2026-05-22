@@ -76,6 +76,6 @@ docker compose up -d --build
 ```json
 {
   "dailyQuotaHours": 5,
-  "autoClockOutTime": "23:50"
+  "autoClockOutTime": "23:50",
 }
 ```
