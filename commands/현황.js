@@ -15,7 +15,7 @@ module.exports = {
     );
 
     if (todayEntries.length === 0) {
-      await interaction.reply({ content: "오늘 출근한 사람이 없습니다.", ephemeral: true });
+      await interaction.reply({ content: "아직 아무도 안 오셨어요. 시바 혼자 지키고 있을게요 🐾", ephemeral: true });
       return;
     }
 
