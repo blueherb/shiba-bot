@@ -3,6 +3,7 @@ const cron = require("node-cron");
 const { readData, writeData } = require("./attendance");
 const { readConfig } = require("./config");
 const { checkQuota } = require("./quota");
+const { sendSettlementDM } = require("./settlement");
 
 function startScheduler(client) {
   const { autoClockOutTime } = readConfig();
@@ -32,6 +33,8 @@ function startScheduler(client) {
       try {
         const user = await client.users.fetch(userID);
         await user.send(`퇴근을 잊으신 것 같아서 ${clockOutTime}에 처리해뒀어요 시바 🐾`);
+        const { dailyQuotaHours } = readConfig();
+        await sendSettlementDM(user, record, dailyQuotaHours);
       } catch {
         console.log(`[스케줄러] ${userID} DM 전송 실패`);
       }
