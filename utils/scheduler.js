@@ -1,7 +1,8 @@
-// 자정 퇴근 스케줄러
+// 자정 퇴근 스케줄러 + 할당량 달성 알림
 const cron = require("node-cron");
 const { readData, writeData } = require("./attendance");
 const { readConfig } = require("./config");
+const { checkQuota } = require("./quota");
 
 function startScheduler(client) {
   const { autoClockOutTime } = readConfig();
@@ -38,6 +39,9 @@ function startScheduler(client) {
 
     if (changed) writeData(data);
   });
+
+  // 매 1분마다 할당량 달성 여부 체크
+  cron.schedule("* * * * *", () => checkQuota(client));
 
   console.log(`자정 퇴근 스케줄러 시작됨 (${autoClockOutTime})`);
 }
