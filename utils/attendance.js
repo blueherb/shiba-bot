@@ -1,3 +1,4 @@
+// attendance.js — 근태 기록 읽기/쓰기
 const fs = require("fs");
 const path = require("path");
 

@@ -41,6 +41,7 @@ module.exports = {
       .setDescription(`⬜ **퇴근 완료!**\n🕐 \`${now}\` — 오늘 하루도 수고하셨습니다!`);
     await interaction.reply({ embeds: [embed] });
 
+    // 할당량 달성 여부 확인 후 DM 발송
     const { dailyQuotaHours } = readConfig();
     if (calcRealWork(record) >= dailyQuotaHours * 60) {
       try {
