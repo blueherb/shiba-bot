@@ -72,11 +72,10 @@ docker compose up -d --build
 |------|--------|------|
 | `dailyQuotaHours` | `5` | 일일 목표 근무 시간 (단위: 시간) |
 | `autoClockOutTime` | `"23:50"` | 자동 퇴근 처리 시각 (HH:MM 형식) |
-| `quotaNotified` | `true` | 할당량 달성 시 DM 알림 보내기 여부 |
+
 ```json
 {
   "dailyQuotaHours": 5,
   "autoClockOutTime": "23:50",
-  "quotaNotified": true  
 }
 ```
