@@ -26,8 +26,9 @@ function calcRealWork(record) {
   const end = record.clockOut ?? new Date().toTimeString().slice(0, 5);
   const elapsed = toMinutes(end) - toMinutes(record.clockIn);
   const breakMins = (record.breaks ?? []).reduce((sum, b) => {
-    if (!b.end) return sum;
-    return sum + toMinutes(b.end) - toMinutes(b.start);
+    // 진행 중(미종료) 휴식은 기준 시각(end)까지 차감해야 휴식 시간이 근무로 잡히지 않는다.
+    const breakEnd = b.end ?? end;
+    return sum + toMinutes(breakEnd) - toMinutes(b.start);
   }, 0);
   return Math.max(0, elapsed - breakMins);
 }
